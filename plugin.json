@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "sigrex",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Build, run and manage trading automation on Sigrex: code and AI strategies, trading bots, webhooks and signals across crypto exchanges, DEXs and prediction markets. Connects the official Sigrex MCP server (OAuth) and bundles the sigrex workflow skill.",
   "author": {
     "name": "sigrexio",

@@ -4,8 +4,8 @@ description: Build, inspect and manage trading automation on Sigrex through the 
 license: MIT
 compatibility: Requires the sigrex MCP server from this plugin (https://mcp.sigrex.io) and a Sigrex account; sign-in happens through OAuth in the browser on first connection.
 metadata:
-  author: Alpha Forge Kft.
-  version: "1.0.0"
+  author: sigrexio
+  version: "1.0.1"
 ---
 
 # Sigrex
