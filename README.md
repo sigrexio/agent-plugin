@@ -13,6 +13,9 @@ package, so it works in any agent that supports the format. It contains:
 - **`skills/sigrex`**: an [Agent Skill](https://agentskills.io) that teaches
   the agent how Sigrex fits together, how to write code strategies and AI
   trading sessions, and the safety rules for anything that can place a trade.
+- **`openclaw.plugin.json`** and **`package.json`**: the same server and skill
+  declared for [OpenClaw](https://clawhub.ai/sigrex/plugins/sigrex), so it
+  installs natively from ClawHub.
 
 There is no executable code and nothing that downloads or updates itself.
 
@@ -24,7 +27,9 @@ strategies need an LLM provider key added in your Sigrex settings.
 
 ### Hermes Agent
 
-From the [Hermes plugin catalog](https://hermes-agent.nousresearch.com/docs/plugins):
+Plugin page: https://hermes-agent.nousresearch.com/docs/plugins/sigrex
+
+From the Hermes plugin catalog:
 
 ```bash
 hermes plugins install sigrex
@@ -40,6 +45,28 @@ hermes plugins enable sigrex
 
 On first use your agent opens the Sigrex sign-in page in your browser. Sign
 in, approve access, and the Sigrex tools become available.
+
+### OpenClaw
+
+Plugin page: https://clawhub.ai/sigrex/plugins/sigrex
+
+From ClawHub (needs OpenClaw 2026.9.7 or newer):
+
+```bash
+openclaw plugins install clawhub:@sigrex/sigrex
+```
+
+The plugin is enabled on install. If `openclaw plugins list` shows it
+disabled, run `openclaw plugins enable sigrex`.
+
+Then connect your Sigrex account: in the OpenClaw Control UI, open the Sigrex
+plugin's page and choose **Connect** under **Accounts** (this needs an
+administrator connection). Sign in, approve access, and the Sigrex tools become
+available. Until you connect, OpenClaw leaves the Sigrex server out of your
+agent instead of failing.
+
+Get new releases with `openclaw plugins update --all`. To stay on one version,
+install `clawhub:@sigrex/sigrex@1.0.3` instead.
 
 ### Other agents
 
