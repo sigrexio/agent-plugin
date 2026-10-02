@@ -11,3 +11,13 @@
 
 - Added the catalog banner (`assets/banner.png`, 1200×600).
 - No changes to the MCP server configuration or the `sigrex` skill.
+
+## 1.0.4 - 2026-10-02
+
+- Hermes Agent: documented the connect step. Hermes signs in only to MCP
+  servers the user adds, so the README, the new `after-install.md` and the
+  `sigrex` skill now give the one-time `hermes mcp add` command and the Hermes
+  Desktop steps.
+- The `sigrex` skill tells the agent what to do when the Sigrex tools are not
+  available yet.
+- No changes to the MCP server configuration.

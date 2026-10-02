@@ -2,10 +2,10 @@
 name: sigrex
 description: Build, inspect and manage trading automation on Sigrex through the sigrex MCP tools. Use when the user mentions Sigrex, or wants to create or debug code strategies, AI (LLM) trading sessions, reactions, webhooks, trading signals or signal bots on crypto exchanges, DEXs or prediction markets such as Hyperliquid or Polymarket.
 license: MIT
-compatibility: Requires the sigrex MCP server from this plugin (https://mcp.sigrex.io) and a Sigrex account; sign-in happens through OAuth in the browser on first connection.
+compatibility: Requires the sigrex MCP server (https://mcp.sigrex.io) and a Sigrex account. The user signs in through OAuth in the browser; some agents need the account connected once before the tools appear.
 metadata:
   author: sigrexio
-  version: "1.0.1"
+  version: "1.0.4"
 ---
 
 # Sigrex
@@ -18,6 +18,27 @@ name prefix depends on the agent you are running in.
 
 **Anything you do here can place real trades with real money.** Follow the
 safety rules below on every task.
+
+## If the Sigrex tools are not available
+
+The tools appear only after the user has signed in to Sigrex. If you cannot
+find any `sigrex` MCP tools, do not guess at account data and do not work
+around it. Tell the user to connect their Sigrex account with the step for
+their agent, then continue once the tools are there:
+
+- **Hermes Agent (terminal):** run
+  `hermes mcp add sigrex --url https://mcp.sigrex.io --auth oauth --connect-timeout 300`,
+  sign in in the browser, then start a new session.
+- **Hermes Desktop:** Capabilities → Connectors → Add your own, with name
+  `sigrex`, type Streamable HTTP, URL `https://mcp.sigrex.io` and auth OAuth;
+  save, then choose Authenticate on the Sigrex card.
+- **OpenClaw:** open the Sigrex plugin page in the Control UI and choose
+  Connect under Accounts.
+- **Any other agent:** add `https://mcp.sigrex.io` as a remote MCP server
+  with OAuth sign-in.
+
+The user does this themselves; never ask for their Sigrex password or a
+token.
 
 ## How Sigrex fits together
 
