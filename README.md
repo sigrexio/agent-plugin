@@ -43,8 +43,37 @@ hermes plugins install sigrexio/agent-plugin --no-enable
 hermes plugins enable sigrex
 ```
 
-On first use your agent opens the Sigrex sign-in page in your browser. Sign
-in, approve access, and the Sigrex tools become available.
+Then connect your Sigrex account. Hermes signs in only to MCP servers you
+add yourself, so add the Sigrex server once:
+
+```bash
+hermes mcp add sigrex --url https://mcp.sigrex.io --auth oauth --connect-timeout 300
+```
+
+Your browser opens the Sigrex sign-in page. Sign in and approve access; the
+command waits up to five minutes. Hermes then lists the Sigrex tools; press
+Enter to keep them all. The tools are available from your next session (or
+after `/reload-mcp`). To sign in again later, run `hermes mcp login sigrex`.
+
+In **Hermes Desktop**, open **Capabilities → Connectors**, choose **Add your
+own** and enter:
+
+| Field | Value |
+| --- | --- |
+| Name | `sigrex` |
+| Type | Streamable HTTP |
+| URL | `https://mcp.sigrex.io` |
+| Auth | OAuth |
+
+Save, then choose **Authenticate** on the Sigrex card. This link opens Hermes
+Desktop with the same form filled in:
+
+```text
+hermes://mcp/install?name=sigrex&config=eyJ1cmwiOiJodHRwczovL21jcC5zaWdyZXguaW8iLCJhdXRoIjoib2F1dGgifQ
+```
+
+Keep the name `sigrex`. Your own entry then takes the place of the server
+entry in the plugin, and the plugin keeps providing the `sigrex` skill.
 
 ### OpenClaw
 
