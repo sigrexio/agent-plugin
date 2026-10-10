@@ -221,8 +221,8 @@ Details: `sigrex-dex-bots`.
 
 ## Flow 7: Prediction Markets
 
-Creating prediction bots and keys is **temporarily disabled**; confirm on the
-live docs first. When available:
+Prediction bots (Polymarket, Outcome.xyz) are driven only through their Bot
+Webhook:
 
 - **Direct:** source posts
   `{"key":"...","slug":"<market-slug>","outcome":"Yes","side":"BUY","size":5}`

@@ -22,7 +22,7 @@
   available yet.
 - No changes to the MCP server configuration.
 
-## 1.1.0 - 2026-10-10
+## 1.1.1 - 2026-10-10
 
 - Added 12 detailed skills alongside `sigrex`: `sigrex-overview`,
   `sigrex-strategy-flows`, `sigrex-webhooks`, `sigrex-cex-bots`,
@@ -36,9 +36,8 @@
   `askQuestion` and the public-strategy tools.
 - Removed the `sigrex` skill's `references/` files; the detailed skills
   replace them.
-- Updated for the current platform: prediction bots are temporarily disabled,
-  `$.Price` is deprecated, Telegram Signals and the Pine Script builder no
-  longer exist.
+- Updated for the current platform: `$.Price` is deprecated, Telegram
+  Signals and the Pine Script builder no longer exist.
 - Still no executable code: the skills contain documentation and examples
   only.
 - No changes to the MCP server configuration.

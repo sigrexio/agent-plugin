@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires the sigrex MCP server (https://mcp.sigrex.io) and a Sigrex account. The user signs in through OAuth in the browser; some agents need the account connected once before the tools appear.
 metadata:
   author: sigrexio
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Sigrex
@@ -64,7 +64,7 @@ TradingView / manual / API ----------------------> Bot Webhook -> Signal Bot
 | **LLM Session** | An AI agent that runs on a cron interval with live data in its prompt, and can send signals. |
 | **Code Reaction** | Deterministic JavaScript that runs when a Data Webhook receives data. |
 | **LLM Reaction** | An AI agent that interprets Data Webhook events. |
-| **Signal Bot** | Executes signals: CEX (Binance, Bitget, Kraken, Gate.io, MEXC, Hyperliquid, Alpaca), DEX (Uniswap on Polygon / Arbitrum), Prediction (Polymarket, Outcome.xyz; beta, and creating new prediction bots is temporarily disabled). |
+| **Signal Bot** | Executes signals: CEX (Binance, Bitget, Kraken, Gate.io, MEXC, Hyperliquid, Alpaca), DEX (Uniswap on Polygon / Arbitrum), Prediction (Polymarket, Outcome.xyz; beta). |
 
 A strategy only trades if **send signal** is enabled, it points to a Bot
 Webhook, that webhook and an attached Signal Bot are ACTIVE, and the bot's
