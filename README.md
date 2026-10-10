@@ -10,12 +10,22 @@ package, so it works in any agent that supports the format. It contains:
 
 - **`mcp.json`**: the official Sigrex MCP server (`https://mcp.sigrex.io`,
   Streamable HTTP, OAuth sign-in). No API keys to copy.
-- **`skills/sigrex`**: an [Agent Skill](https://agentskills.io) that teaches
-  the agent how Sigrex fits together, how to write code strategies and AI
-  trading sessions, and the safety rules for anything that can place a trade.
-- **`openclaw.plugin.json`** and **`package.json`**: the same server and skill
-  declared for [OpenClaw](https://clawhub.ai/sigrex/plugins/sigrex), so it
-  installs natively from ClawHub.
+- **`skills/`**: [Agent Skills](https://agentskills.io) that teach the agent
+  how Sigrex works and how to build, test and run complete trading flows:
+  - `sigrex`: the entry point: connecting the MCP server, safety rules, tool
+    tips and which detailed skill to load.
+  - `sigrex-overview`, `sigrex-strategy-flows`: the platform model and
+    step-by-step playbooks with testing, go-live and troubleshooting.
+  - `sigrex-webhooks`, `sigrex-cex-bots`, `sigrex-dex-bots`,
+    `sigrex-prediction-bots`: signals and execution on exchanges, Uniswap
+    and prediction markets.
+  - `sigrex-code-strategies`, `sigrex-llm-trading`, `sigrex-reactions`:
+    JavaScript strategies, AI sessions and event-driven reactions.
+  - `sigrex-api-mcp`, `sigrex-social`, `sigrex-integrations`: the REST API
+    and MCP tools, sharing, and signal sources such as TradingView.
+- **`openclaw.plugin.json`** and **`package.json`**: the same server and skills
+  declared for [OpenClaw](https://clawhub.ai/sigrex/plugins/sigrex), so they
+  install natively from ClawHub.
 
 There is no executable code and nothing that downloads or updates itself.
 
@@ -102,8 +112,8 @@ install `clawhub:@sigrex/sigrex@1.0.3` instead.
 Any agent that supports Agent Plugins v1 can load this folder as a plugin.
 If your agent only supports MCP servers, connect `https://mcp.sigrex.io`
 directly (see the [MCP server docs](https://docs.sigrex.io/more/mcp-server));
-you can also copy `skills/sigrex` into your agent's skills folder if it
-supports Agent Skills.
+you can also copy the folders under `skills/` into your agent's skills
+folder if it supports Agent Skills.
 
 ## What you can ask
 
