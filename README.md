@@ -1,5 +1,4 @@
 # Sigrex agent plugin
-[![smithery badge](https://smithery.ai/badge/sigrex/sigrex)](https://smithery.ai/servers/sigrex/sigrex)
 
 The official [Sigrex](https://sigrex.io) plugin for AI agents. Build, run and
 manage your trading automation in plain language: code and AI strategies,
