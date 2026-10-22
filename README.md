@@ -1,6 +1,5 @@
 # Sigrex agent plugin
 [![Sigrex MCP connector – tool definition quality and endpoint health on Glama](https://glama.ai/mcp/connectors/io.sigrex.mcp/sigrex/badges/score.svg)](https://glama.ai/mcp/connectors/io.sigrex.mcp/sigrex)
-[smithery.ai](https://smithery.ai/servers/sigrex/sigrex)
 
 The official [Sigrex](https://sigrex.io) plugin for AI agents. Build, run and
 manage your trading automation in plain language: code and AI strategies,
@@ -149,6 +148,8 @@ folder if it supports Agent Skills.
 - MCP server docs: https://docs.sigrex.io/more/mcp-server
 - Sigrex docs: https://docs.sigrex.io
 - Support: open an issue on this repository
+- Glama: https://glama.ai/mcp/connectors/io.sigrex.mcp/sigrex
+- Smithery: https://smithery.ai/servers/sigrex/sigrex
 
 ## License
 
