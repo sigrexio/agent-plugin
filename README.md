@@ -54,17 +54,33 @@ hermes plugins install sigrexio/agent-plugin --no-enable
 hermes plugins enable sigrex
 ```
 
-Then connect your Sigrex account. Hermes signs in only to MCP servers you
-add yourself, so add the Sigrex server once:
+Then sign in to your Sigrex account:
+
+```bash
+hermes mcp login sigrex
+```
+
+Your browser opens the Sigrex sign-in page. Sign in and approve access; the
+command waits up to five minutes. The tools are available from your next
+session (or after `/reload-mcp`). Run the same command to sign in again later.
+
+In **Hermes Desktop**, open **Capabilities → Connectors** and choose
+**Authenticate** on the Sigrex card.
+
+Hermes stores and refreshes the token in your profile and adds nothing to
+your `config.yaml`. Removing the plugin signs you out.
+
+#### Older Hermes releases
+
+On a Hermes release without plugin OAuth sign-in, `hermes mcp login sigrex`
+reports that the server is not found. Add the server yourself instead:
 
 ```bash
 hermes mcp add sigrex --url https://mcp.sigrex.io --auth oauth --connect-timeout 300
 ```
 
-Your browser opens the Sigrex sign-in page. Sign in and approve access; the
-command waits up to five minutes. Hermes then lists the Sigrex tools; press
-Enter to keep them all. The tools are available from your next session (or
-after `/reload-mcp`). To sign in again later, run `hermes mcp login sigrex`.
+Your browser opens the Sigrex sign-in page. After you approve access, Hermes
+lists the Sigrex tools; press Enter to keep them all.
 
 In **Hermes Desktop**, open **Capabilities → Connectors**, choose **Add your
 own** and enter:
