@@ -41,3 +41,19 @@
 - Still no executable code: the skills contain documentation and examples
   only.
 - No changes to the MCP server configuration.
+
+## 1.2.0 - 2026-10-23
+
+- Hermes Agent: the plugin now declares the Sigrex server as OAuth in
+  `plugin.json` (`extensions.com.nousresearch.hermes.servers.sigrex.auth`).
+  Hermes signs in to the plugin's own server, so you no longer add it
+  yourself: run `hermes mcp login sigrex`, or choose Authenticate on the
+  Sigrex card in Hermes Desktop. Hermes stores and refreshes the token in your
+  profile, adds nothing to `config.yaml`, and signs you out when you remove
+  the plugin.
+- Needs a Hermes release with plugin OAuth sign-in. On an older release,
+  `hermes mcp login sigrex` reports that the server is not found; the README,
+  `after-install.md` and the `sigrex` skill keep the `hermes mcp add` steps
+  for that case.
+- Other agents ignore the new extension. No changes to the MCP server URL or
+  transport, and no changes to the skills beyond the Hermes connect steps.

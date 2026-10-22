@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "sigrex",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Build, run and manage trading automation on Sigrex: code and AI strategies, trading bots, webhooks and signals across crypto exchanges, DEXs and prediction markets. Connects the official Sigrex MCP server (OAuth) and bundles Sigrex workflow skills for strategies, bots, webhooks, the API and safe testing.",
   "author": {
     "name": "sigrexio",
@@ -22,5 +22,14 @@
     "hyperliquid",
     "polymarket",
     "mcp"
-  ]
+  ],
+  "extensions": {
+    "com.nousresearch.hermes": {
+      "servers": {
+        "sigrex": {
+          "auth": "oauth"
+        }
+      }
+    }
+  }
 }

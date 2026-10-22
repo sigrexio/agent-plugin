@@ -29,12 +29,15 @@ find any `sigrex` MCP tools, do not guess at account data and do not work
 around it. Tell the user to connect their Sigrex account with the step for
 their agent, then continue once the tools are there:
 
-- **Hermes Agent (terminal):** run
-  `hermes mcp add sigrex --url https://mcp.sigrex.io --auth oauth --connect-timeout 300`,
-  sign in in the browser, then start a new session.
-- **Hermes Desktop:** Capabilities → Connectors → Add your own, with name
+- **Hermes Agent (terminal):** run `hermes mcp login sigrex`, sign in in the
+  browser, then start a new session. If Hermes reports that the server is not
+  found, its release predates plugin sign-in: run
+  `hermes mcp add sigrex --url https://mcp.sigrex.io --auth oauth --connect-timeout 300`
+  instead.
+- **Hermes Desktop:** Capabilities → Connectors, then choose Authenticate on
+  the Sigrex card. If the card offers no Authenticate, choose Add your own, with name
   `sigrex`, type Streamable HTTP, URL `https://mcp.sigrex.io` and auth OAuth;
-  save, then choose Authenticate on the Sigrex card.
+  save, then choose Authenticate.
 - **OpenClaw:** open the Sigrex plugin page in the Control UI and choose
   Connect under Accounts.
 - **Any other agent:** add `https://mcp.sigrex.io` as a remote MCP server
