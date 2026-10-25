@@ -133,8 +133,9 @@ POST /api/v2/strategy/code
 }
 ```
 
-   A `400` with an invalid-code message usually means a forbidden identifier
-   or a syntax error.
+   A `400` with an invalid-code message names the problem: a forbidden
+   identifier, a broken code rule (undeclared variable, `while (true)`, a
+   change to a built-in, a size over the limit) or a syntax error.
 4. **Rung 2:** `PUT /api/v2/strategy/code/401/status {"status":"ACTIVE"}`
    with bots inactive. Read `GET /strategy/code/401` (storage incl. your
    `S.dbg`/`S.lastSignal`) over several runs.

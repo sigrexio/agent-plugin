@@ -91,8 +91,9 @@ if (!inLong && p.signal === "BUY" && conf > 0.8) {
 A complete version with de-duplication is example 4 in the examples
 reference of the `sigrex-code-strategies` skill. All Code
 Strategy rules apply: one action per run, no double `EXIT`, 5 s, 24 KB
-storage, forbidden identifiers (full list in the
-`sigrex-code-strategies` skill).
+storage, forbidden identifiers and the code rules checked on save (declared
+variables, loops that end by their condition, read-only built-ins, size
+limits; both in the `sigrex-code-strategies` skill).
 
 ## Step 2b: LLM Reaction
 

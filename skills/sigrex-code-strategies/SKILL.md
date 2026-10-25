@@ -1,9 +1,9 @@
 ---
 name: sigrex-code-strategies
-description: Write, validate, deploy and debug Sigrex Code Strategies and Code Reactions, the sandboxed JavaScript that runs on Sigrex and emits LONG/SHORT/EXIT signals. Covers the execution model (one action per run, one position per strategy, no double EXIT), API config fields (send_signal, webhook_id, symbol, use_price), the $ runtime ($.Strategy, $.Storage, $.Http, $.Env, $.Ta, $.getExchangeRate, $.Request), limits, the forbidden-identifier list that silently breaks code (close, alert, top, self, fetch, console...), a pre-upload checklist, and tested templates. Use whenever creating or changing Sigrex strategy or reaction code.
+description: Write, validate, deploy and debug Sigrex Code Strategies and Code Reactions, the sandboxed JavaScript that runs on Sigrex and emits LONG/SHORT/EXIT signals. Covers the execution model (one action per run, one position per strategy, no double EXIT), API config fields (send_signal, webhook_id, symbol, use_price), the $ runtime ($.Strategy, $.Storage, $.Http, $.Env, $.Ta, $.getExchangeRate, $.Request), limits, the forbidden-identifier list that silently breaks code (close, alert, top, self, fetch, console...), the code rules checked on save (declared variables, bounded loops, read-only built-ins, size limits), a pre-upload checklist, and tested templates. Use whenever creating or changing Sigrex strategy or reaction code.
 metadata:
   author: sigrex
-  version: "2.0"
+  version: "2.1"
 ---
 
 # Sigrex Code Strategies And Code Reactions
@@ -160,8 +160,30 @@ those values from arrays or compute the indicator by hand.
 **Before uploading, check the whole source** (comments and strings
 included) for every word in the list above, plus case variants and
 camelCase prefixes. Also confirm that only one `$.Strategy.action` can run
-per execution, every `$` call that returns a promise is awaited, and
-`$.Price` is not used.
+per execution, every `$` call that returns a promise is awaited,
+`$.Price` is not used, and the code follows the Code Rules below.
+
+## Code Rules (checked on save)
+
+On create and update the API also checks how the code is written and answers
+`400` with the reason when a rule is broken. Write code that already follows
+them:
+
+| Rule | Write this instead |
+| --- | --- |
+| Plain JavaScript, at most 100,000 characters | No TypeScript types, no `import` / `export` |
+| Declare every variable | `let total = 0`, not `total = 0` |
+| Built-ins (`Math`, `Object`, `JSON`, `Array`...) and `$.Ta` are read-only | Keep helpers in your own objects: `const fmt = { pct: (x) => x.toFixed(2) }`, never `Math.pct = ...` |
+| Every loop must end by its own condition | `for (let i = 0; i < prices.length; i++)`, not `while (true) { ... break; }` or `for (;;)` |
+| Loop bounds up to 10,000,000 | `i < 1e12` is rejected |
+| Sizes up to 1,000,000 | Applies to `new Array(n)`, typed arrays, `Array.from({ length: n })`, `.repeat(n)`, `.padStart(n)`, `.padEnd(n)` |
+| Regular expressions as literals, without nested quantifiers | `/btc/i`, not `new RegExp(text)` or `/(a+)+/` |
+| `this` only inside class methods | Plain objects and functions |
+| No prototype access | `Object.hasOwn(obj, key)`, not `Object.prototype.hasOwnProperty.call(obj, key)` |
+| No `arguments`, `with` or `debugger` | Rest parameters: `(...args) => args.length` |
+
+Check the code against these before uploading, together with the forbidden
+list above.
 
 ## Skeleton (copy this)
 
@@ -226,9 +248,11 @@ self-stopping guard, managing other strategies with the API client):
 
 ## Deploy And Test Workflow
 
-1. Write the code; check it against the forbidden-identifier list.
+1. Write the code; check it against the forbidden-identifier list and the
+   code rules.
 2. Create the strategy via MCP (`post_strategy_code`) or REST; the API
-   validates code on create/update and returns `400` for invalid code.
+   validates code on create/update and returns `400` with the reason
+   (forbidden identifier or code rule) for invalid code.
 3. Confirm Bot Webhook, bot symbol and signal `symbol` are identical; keep
    bots `INACTIVE` or rely on `TEST` signals while observing.
 4. Activate the strategy (approval required), watch storage and signal logs
