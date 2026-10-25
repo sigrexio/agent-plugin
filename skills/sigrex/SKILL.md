@@ -155,7 +155,7 @@ symbol matches the signal symbol. The full execution checklist is in
 
 ### Create a code strategy
 1. Load `sigrex-code-strategies` for the runtime API, the forbidden
-   identifiers and tested templates.
+   identifiers, the code rules checked on save and tested templates.
 2. Find the target Bot Webhook (`get_webhook_bot`) and confirm the symbol
    format the attached bot expects (for example `BTCUSDC` on Hyperliquid).
 3. Write the code; keep one action per run, persist position state in

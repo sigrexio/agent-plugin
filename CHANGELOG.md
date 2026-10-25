@@ -57,3 +57,13 @@
   for that case.
 - Other agents ignore the new extension. No changes to the MCP server URL or
   transport, and no changes to the skills beyond the Hermes connect steps.
+
+## Unreleased
+
+- Skills: documented the code rules the Sigrex API now checks when a Code
+  Strategy or Code Reaction is created or updated (declared variables, loops
+  that end by their condition, read-only built-ins and `$.Ta`, size and loop
+  limits, regular expression literals). `sigrex-code-strategies` has a new
+  Code Rules section with what to write instead; `sigrex`, `sigrex-reactions`,
+  `sigrex-strategy-flows` and `sigrex-llm-trading` point to it.
+- No changes to the MCP server configuration.
