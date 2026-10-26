@@ -58,7 +58,7 @@
 - Other agents ignore the new extension. No changes to the MCP server URL or
   transport, and no changes to the skills beyond the Hermes connect steps.
 
-## Unreleased
+## 1.2.1 - 2026-10-26
 
 - Skills: documented the code rules the Sigrex API now checks when a Code
   Strategy or Code Reaction is created or updated (declared variables, loops
