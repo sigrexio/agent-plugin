@@ -1,6 +1,6 @@
 {
   "name": "@sigrex/sigrex",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
   "description": "Build, run and manage trading automation on Sigrex: code and AI strategies, trading bots, webhooks and signals across crypto exchanges, DEXs and prediction markets. Connects the official Sigrex MCP server (OAuth) and bundles Sigrex workflow skills for strategies, bots, webhooks, the API and safe testing.",
   "license": "MIT",

@@ -295,6 +295,6 @@ When something does not execute, use `references/troubleshooting.md`.
 - https://docs.sigrex.io/readme.md
 - https://docs.sigrex.io/getting-started/webhook.md
 - https://docs.sigrex.io/getting-started/signal-payload-format.md
-- https://docs.sigrex.io/startegies/code.md
-- https://docs.sigrex.io/startegies/llm-session/signal-generation.md
+- https://docs.sigrex.io/strategies/code.md
+- https://docs.sigrex.io/strategies/llm-session/signal-generation.md
 - https://docs.sigrex.io/reaction/data-webhook.md

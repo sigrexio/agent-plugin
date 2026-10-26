@@ -274,7 +274,7 @@ self-stopping guard, managing other strategies with the API client):
 
 ## Canonical Docs
 
-- https://docs.sigrex.io/startegies/code.md
+- https://docs.sigrex.io/strategies/code.md
 - https://docs.sigrex.io/reaction/code-reaction.md
 - https://docs.sigrex.io/api-reference/reference/strategies/code-strategies.md
 - https://docs.sigrex.io/api-reference/reference/strategies/reactions/code-reaction.md
