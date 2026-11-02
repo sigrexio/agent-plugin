@@ -67,3 +67,15 @@
   Code Rules section with what to write instead; `sigrex`, `sigrex-reactions`,
   `sigrex-strategy-flows` and `sigrex-llm-trading` point to it.
 - No changes to the MCP server configuration.
+
+## 1.2.2 - 2026-11-02
+
+- Skills: documented the new HTTP limits for Code Strategies and Code
+  Reactions: at most 30 `$.Http` calls per run (`generateSignature` doesn't
+  count) and response bodies up to 5 MB. Over a limit the call returns
+  `status: 0` with the reason in `text`; the strategy is not suspended.
+  `sigrex-code-strategies` lists them in Limits and the runtime reference,
+  which also notes that failed responses are cached and that identical GETs
+  in flight are shared; `sigrex-strategy-flows` troubleshooting covers the
+  `status: 0` replies.
+- No changes to the MCP server configuration.
