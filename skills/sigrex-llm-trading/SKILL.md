@@ -38,16 +38,17 @@ covered in `sigrex-reactions`.
 ```text
 GET  /api/v2/api/llm/services                 enabled providers (confirm IDs here)
 GET  /api/v2/api/llm/models/{serviceId}       models, with their IDs
-POST /api/v2/api/llm                          {"serviceId":4,"modelId":<id>,"apiKey":"<key>","name":"claude main"}
 PUT  /api/v2/api/llm/{id}/model               {"modelId":<id>}   switch model, same provider
 GET  /api/v2/api/llm                          your connections (llm_api_id values)
 DELETE /api/v2/api/llm/{id}                   400 while a strategy uses it
 ```
 
-Sigrex test-calls the provider on creation; an invalid key or an account
-without credits fails. The API key cannot be edited (delete and recreate);
-the model can be changed freely. Keys are encrypted and decrypted only at
-runtime. Charts need a vision-capable model.
+The user adds the provider key in the dashboard under **API connection** →
+**LLM Provider**; there is no MCP tool for adding it, so never ask for the
+key in the chat. Sigrex test-calls the provider when the key is added; an
+invalid key or an account without credits fails. The API key cannot be
+edited (delete and recreate); the model can be changed freely. Keys are
+encrypted and decrypted only at runtime. Charts need a vision-capable model.
 
 ## Step 2: Create The Session
 

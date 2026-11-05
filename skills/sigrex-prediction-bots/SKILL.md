@@ -43,20 +43,16 @@ How Polymarket connections work:
 - Funding: send USDC to the Profile Address and wait for confirmation.
 - Recommend a dedicated wallet for automation.
 
-API (prefix `/api/v2`):
+The user connects the account in the dashboard under **API connection** →
+**Prediction Market**. There is no MCP tool for adding or testing it, so
+never ask for the wallet private key in the chat. Once it is connected
+(prefix `/api/v2`):
 
 ```text
-POST /api/prediction/test     {"exchangeId":15,"funderAddress":"0x...","walletPrivateKey":"<redacted>"}
-POST /api/prediction          {"exchangeId":15,"name":"Polymarket main","funderAddress":"0x...","walletPrivateKey":"<redacted>"}
 GET  /api/prediction          GET /api/prediction/bot/signal/{id}?page=1&limit=50
 PUT  /api/prediction/{id}/status {"status":"ACTIVE"|"INACTIVE"}
 DELETE /api/prediction/{id}   (409 while bots use it)
 ```
-
-Send `funderAddress` as a string even though the published test schema
-types it as a number. Never log, echo or store the private key; collect it
-only through the dashboard or a secure channel, and prefer the user doing
-this step in the dashboard themselves.
 
 ## Bot Configuration
 

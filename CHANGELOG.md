@@ -79,3 +79,15 @@
   in flight are shared; `sigrex-strategy-flows` troubleshooting covers the
   `status: 0` replies.
 - No changes to the MCP server configuration.
+
+## 1.2.3 - 2026-11-05
+
+- Skills: API keys can no longer be added or tested through the Sigrex MCP
+  server. The user adds exchange, prediction-market and LLM keys in the
+  dashboard under **API connection**; the MCP tools can still list them,
+  switch them on or off, delete them and change an LLM key's model.
+  `sigrex`, `sigrex-overview`, `sigrex-api-mcp`, `sigrex-strategy-flows`,
+  `sigrex-cex-bots`, `sigrex-prediction-bots` and `sigrex-llm-trading` no
+  longer tell the agent to create or test keys, and tell it not to ask for
+  keys in the chat.
+- No changes to the MCP server configuration.
