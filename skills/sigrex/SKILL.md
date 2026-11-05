@@ -12,9 +12,16 @@ metadata:
 
 Sigrex is a trading automation platform. The `sigrex` MCP server gives you
 full read and write access to the signed-in user's account: strategies,
-AI sessions, reactions, webhooks, signal bots, exchange connections and
-live prices. Use the tools from the `sigrex` MCP server; the exact tool
-name prefix depends on the agent you are running in.
+AI sessions, reactions, webhooks, signal bots, logs and live prices. Use
+the tools from the `sigrex` MCP server; the exact tool name prefix depends
+on the agent you are running in.
+
+**API keys can't be added through MCP.** The user adds exchange,
+prediction-market and LLM provider keys in the Sigrex dashboard under
+**API connection** (**Exchange**, **LLM Provider** or **Prediction Market**).
+You can list them, switch them on or off, delete them and change an LLM
+key's model. Never ask the user to paste a key into the chat; no tool
+takes it.
 
 **Anything you do here can place real trades with real money.** Follow the
 safety rules below on every task.
@@ -167,7 +174,8 @@ symbol matches the signal symbol. The full execution checklist is in
 ### Create an AI trading agent (LLM Session)
 1. Load `sigrex-llm-trading` for template variables, tools and prompt design.
 2. Pick a model the user has access to (`get_api_llm`,
-   `get_api_llm_models_serviceId`).
+   `get_api_llm_models_serviceId`). If they have no LLM key yet, ask them
+   to add one in the dashboard (**API connection** → **LLM Provider**) first.
 3. Write the prompt with live data via `{{price:...}}` and `{{get:...}}`,
    require the agent to journal its reasoning in storage, and keep secrets
    out of it.

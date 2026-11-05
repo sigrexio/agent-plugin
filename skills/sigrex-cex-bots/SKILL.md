@@ -1,6 +1,6 @@
 ---
 name: sigrex-cex-bots
-description: Connect centralized-exchange API keys to Sigrex and configure CEX Signal Bots for spot or USD-M futures on Binance, Bitget, MEXC, Gate.io, Kraken, Hyperliquid or Alpaca, including credential testing and rotation, bot fields, symbol formats, quote/base amount sizing, amount-from-signal, delay/frequency, folders, activation and troubleshooting. Use when setting up or debugging any CEX bot or exchange API key on Sigrex.
+description: Connect centralized-exchange API keys to Sigrex and configure CEX Signal Bots for spot or USD-M futures on Binance, Bitget, MEXC, Gate.io, Kraken, Hyperliquid or Alpaca, including key setup in the dashboard and rotation, bot fields, symbol formats, quote/base amount sizing, amount-from-signal, delay/frequency, folders, activation and troubleshooting. Use when setting up or debugging any CEX bot or exchange API key on Sigrex.
 metadata:
   author: sigrex
   version: "2.0"
@@ -33,20 +33,13 @@ meanings, so use the label the dashboard shows for that exchange.
 
 Create the key on the exchange first. Recommended exchange-side settings:
 trading enabled, **withdrawals disabled**, and the correct product (spot vs
-futures). Then connect it:
+futures). The user then adds it in the Sigrex dashboard under
+**API connection** → **Exchange**. There is no MCP tool for adding or testing
+keys, so never ask for the key or secret in the chat. Sigrex validates the
+key with a live test request when it is added.
 
-```json
-POST /api/v2/api/exchange/test
-{"exchangeId": 2, "publicKey": "<api-key>", "privateKey": "<api-secret>"}
-
-POST /api/v2/api/exchange
-{"exchangeId": 2, "name": "Binance spot main", "publicKey": "<api-key>", "privateKey": "<api-secret>"}
-```
-
-Fields: `exchangeId` (required, number), `publicKey` (required),
-`privateKey` (required), `name` (optional, max 255), `extra` (optional
-string). Sigrex validates the key with a live test request on creation;
-invalid keys return `400`.
+Then find the connection and its id (`api_id` in bot bodies) with
+`GET /api/v2/api/exchange`.
 
 Rules:
 
@@ -54,11 +47,11 @@ Rules:
   two connections (e.g. `exchangeId` `2` and `3`).
 - **Immutable.** Keys and exchange cannot be edited. To rotate: list linked
   bots (`GET /api/exchange/bot/signal/{id}?page=1&limit=50`), repoint or
-  delete them, delete the connection (`409` while still linked), create a new
-  one, reattach.
+  delete them, delete the connection (`409` while still linked), have the
+  user add the new key in the dashboard, reattach.
 - Keys are encrypted server-side and decrypted only at execution time.
 - `PUT /api/exchange/{id}/status {"status":"INACTIVE"}` disables a key.
-- Collect secrets through a secure channel; never echo them back.
+- Never collect keys in the chat; the user enters them in the dashboard.
 
 ## Step 2: Bot Webhook
 
@@ -151,7 +144,8 @@ To run the same setup on another symbol: duplicate, then update `symbol`,
 
 ## Test And Activate
 
-1. `POST /api/exchange/test` passes, then create the connection.
+1. The user has added the exchange key in the dashboard and it is `ACTIVE`
+   (`GET /api/exchange`).
 2. Bot Webhook `ACTIVE`, bot `INACTIVE`.
 3. Send `{"symbol":"<bot symbol>","side":"BUY","flag":"TEST"}` (plus `key`);
    check the signal log.

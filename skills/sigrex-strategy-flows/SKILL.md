@@ -17,7 +17,9 @@ connection, `101` Bot Webhook, `55` Data Webhook, `301` bot, `401`
 strategy. Use the IDs returned by your own create calls. Every REST route
 below has an MCP tool named after it (`POST /webhook/bot` is
 `post_webhook_bot`, `PUT /strategy/code/{id}/status` is
-`put_strategy_code_id_status`); confirm exact names in the MCP tool list.
+`put_strategy_code_id_status`), except adding and testing API keys: the
+user does that in the dashboard under **API connection**. Confirm exact
+names in the MCP tool list.
 
 ## Part 0: The Universal Procedure
 
@@ -52,7 +54,7 @@ and set the resource `INACTIVE` right away if it came up active.
 | Strategy `webhook_id` = bot's `webhook_id` | `GET /strategy/code/{id}` (or llm-session/reaction), `GET /bot/signal/cex/{id}` |
 | Strategy symbol(s) = bot `symbol` = exchange format | Same responses; compare exact strings |
 | Bots on the hook are the intended ones | `GET /webhook/bot/bot/signal/{hookId}/cex?page=1&limit=50` (also `/dex`, `/prediction`) |
-| Exchange key valid and `ACTIVE` | `GET /api/exchange`; `POST /api/exchange/test` |
+| Exchange key valid and `ACTIVE` | `GET /api/exchange`; if the venue rejects it, the user recreates the key in the dashboard |
 | Webhook key known to the sender | Payload `key` (bot hook) / `X-Key` header (data hook) |
 | Size above venue minimum, funds available | Exchange rules; account balance |
 | `$.Env` variables exist (code) | Ask the user to confirm names and values in the dashboard |
@@ -96,10 +98,9 @@ skipped and rung 3 uses the smallest size.
 
 `TradingView / script --> Bot Webhook --> CEX bot --> exchange`
 
-1. **Exchange key** (`sigrex-cex-bots`):
-   `POST /api/v2/api/exchange/test`, then
-   `POST /api/v2/api/exchange {"exchangeId":2,"name":"binance-spot","publicKey":"...","privateKey":"..."}`
-   gives `api_id` 202.
+1. **Exchange key** (`sigrex-cex-bots`): the user adds it in the dashboard
+   (**API connection** → **Exchange**); `GET /api/v2/api/exchange` gives its
+   `api_id`, 202.
 2. **Bot Webhook:**
    `POST /api/v2/webhook/bot {"name":"tv-btc","description":"TradingView BTCUSDT 1h","is_safe":true,"hash_key":"<secret>"}`
    gives 101 and hash `<hash>`.
@@ -152,10 +153,10 @@ independent decisions per coin, duplicate the strategy
 
 `LLM Session (cron) --open_position/close_position--> Bot Webhook --> bot`
 
-1. **LLM connection** (`sigrex-llm-trading`): `GET /api/v2/api/llm/services`,
-   `GET /api/v2/api/llm/models/{serviceId}`, then
-   `POST /api/v2/api/llm {"serviceId":4,"modelId":<id>,"apiKey":"..."}`
-   gives 7. Vision model if charts are used.
+1. **LLM connection** (`sigrex-llm-trading`): the user adds the provider
+   key in the dashboard (**API connection** → **LLM Provider**);
+   `GET /api/v2/api/llm` gives its id, 7. Vision model if charts are used
+   (`PUT /api/v2/api/llm/{id}/model` switches the model).
 2. Steps 1 to 3 of Flow 1 (bot `INACTIVE`).
 3. **Analysis-only first:**
    `POST /api/v2/strategy/llm-session {"name":"BTC agent","llm_api_id":7,"cron_interval":"1H","prompt":"...","send_signal":false}`.
