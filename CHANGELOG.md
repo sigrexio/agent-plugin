@@ -91,3 +91,12 @@
   longer tell the agent to create or test keys, and tell it not to ask for
   keys in the chat.
 - No changes to the MCP server configuration.
+
+## 1.2.4 - 2026-11-09
+
+- Hermes Agent: the plugin now declares the Sigrex server as untrusted in
+  `plugin.json` (`extensions.com.nousresearch.hermes.servers.sigrex.trust`).
+  The connection has full account access, including live trades, so Hermes
+  asks you before every write-capable Sigrex tool call.
+- Other agents ignore the new setting. No changes to the MCP server URL,
+  transport or OAuth sign-in, and no changes to the skills.
