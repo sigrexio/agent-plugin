@@ -1,9 +1,9 @@
 ---
 name: sigrex-cex-bots
-description: Connect centralized-exchange API keys to Sigrex and configure CEX Signal Bots for spot or USD-M futures on Binance, Bitget, MEXC, Gate.io, Kraken, Hyperliquid or Alpaca, including key setup in the dashboard and rotation, bot fields, symbol formats, quote/base amount sizing, amount-from-signal, delay/frequency, folders, activation and troubleshooting. Use when setting up or debugging any CEX bot or exchange API key on Sigrex.
+description: Connect exchange API keys to Sigrex and configure CEX Signal Bots for spot or futures on Binance, Bitget, MEXC, Gate.io, Kraken, Hyperliquid, Aster, Lighter or Alpaca, including key setup in the dashboard and rotation, bot fields, symbol formats, quote/base amount sizing, amount-from-signal, delay/frequency, folders, activation and troubleshooting. Use when setting up or debugging any CEX bot or exchange API key on Sigrex.
 metadata:
   author: sigrex
-  version: "2.0"
+  version: "2.1"
 ---
 
 # Sigrex CEX Signal Bots
@@ -23,11 +23,24 @@ connection. Setup is: **exchange API key, then Bot Webhook, then bot**.
 | Gate.io | `8` | `9` | Futures: USD-M only |
 | Hyperliquid | `11` | `12` | USDC only |
 | Bitget | `13` | `14` | Futures: USD-M only |
+| Aster | see `/exchange/cex` | see `/exchange/cex` | On-chain exchange; connects with a Pro API wallet (see below) |
+| Lighter | see `/exchange/cex` | see `/exchange/cex` | On-chain exchange; connects with an API key and its indexes (see below) |
 
 Confirm with `GET /api/v2/exchange/cex`. A catalog entry with `extra: true`
 needs an additional credential value beyond key and secret (sent as the
-`extra` string, e.g. an API passphrase); the docs do not list per-exchange
-meanings, so use the label the dashboard shows for that exchange.
+`extra` string, e.g. Bitget's API passphrase or Lighter's API key index); use
+the label the dashboard shows for that exchange.
+
+Aster and Lighter don't use a classic key and secret:
+
+| Exchange | Dashboard fields | Where they come from |
+| --- | --- | --- |
+| Aster | Main wallet address + API wallet private key | A **Pro API** wallet created on Aster (API Management → Pro API) for the main (login) wallet; create it without withdraw permission |
+| Lighter | Account index + API key private key + API key index | The Lighter account index (a number, not the wallet address) and an API key created on Lighter (index 0-254) |
+
+Private keys are accepted with or without the `0x` prefix. Never store or
+ask for the user's main wallet private key; these connections only need an
+API wallet or API key.
 
 ## Step 1: Exchange API Key
 
@@ -96,8 +109,10 @@ same required set. New bots should stay `INACTIVE` until tested.
 
 The bot's `symbol` must match the exchange's own format **and** the symbol
 in every signal. Formats differ (`BTCUSDT` vs `BTC_USDT`); Hyperliquid
-examples use `BTCUSDC`. Look up the exact market name on the exchange, use it
-in the bot, in TradingView alerts, and in strategy signal symbols.
+examples use `BTCUSDC`, Aster uses `BTCUSDT`, and Lighter uses the market
+name: `ETH` for futures and `ETH/USDC` for spot. Look up the exact market name
+on the exchange, use it in the bot, in TradingView alerts, and in strategy
+signal symbols.
 
 ## Sizing
 
@@ -113,7 +128,10 @@ in the bot, in TradingView alerts, and in strategy signal symbols.
 Amounts must be at or above the exchange's minimum notional for the pair, or
 the exchange rejects the order. Sigrex documents no leverage or margin-mode
 setting for futures bots; check how the exchange account is configured
-(leverage, margin mode, position mode) before going live.
+(leverage, margin mode, position mode) before going live. On Aster and
+Lighter futures a quote `amount` is the position value, not the margin; the
+leverage comes from the account setting on the exchange. Aster futures work
+in both one-way and hedge position mode.
 
 ## How Signals Map To Orders
 

@@ -100,3 +100,25 @@
   asks you before every write-capable Sigrex tool call.
 - Other agents ignore the new setting. No changes to the MCP server URL,
   transport or OAuth sign-in, and no changes to the skills.
+
+## 1.3.0 - 2026-11-13
+
+- Skills: new venues. `sigrex-cex-bots` covers Aster and Lighter (spot and
+  futures): Aster connects with a Pro API wallet (main wallet address + API
+  wallet private key), Lighter with an API key (account index, API key
+  private key and API key index), plus their symbol formats. Kalshi joins
+  `sigrex-prediction-bots` as a prediction market that connects with a Kalshi
+  API key.
+- `sigrex-prediction-bots`: picking one market of an event (Polymarket
+  `/event/<event>/<market>`, Kalshi `?market=`, Outcome.xyz `?outcome=`), the
+  slug to send per market, market preflight with `{exchange}` as
+  `polymarket`, `outcome` or `kalshi`, and the new sell behaviour: a SELL
+  closes the whole position (or `size` shares when the size comes from the
+  signal), retries at up to 5%, 15% and 30% below the best bid, and leaves
+  the bot running with a warning notification when shares stay unsold.
+- `sigrex`, `sigrex-overview`, `sigrex-strategy-flows` (and its
+  troubleshooting reference), `sigrex-code-strategies` examples and the
+  `sigrex-api-mcp` API surface follow these changes; the API surface also
+  lists the exchange `type` / `service` filters and the Kalshi fields of the
+  prediction API key endpoints.
+- No changes to the MCP server configuration.
