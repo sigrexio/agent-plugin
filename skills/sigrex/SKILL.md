@@ -5,7 +5,7 @@ license: MIT
 compatibility: Requires the sigrex MCP server (https://mcp.sigrex.io) and a Sigrex account. The user signs in through OAuth in the browser; some agents need the account connected once before the tools appear.
 metadata:
   author: sigrexio
-  version: "1.1.1"
+  version: "1.1.2"
 ---
 
 # Sigrex
@@ -74,7 +74,7 @@ TradingView / manual / API ----------------------> Bot Webhook -> Signal Bot
 | **LLM Session** | An AI agent that runs on a cron interval with live data in its prompt, and can send signals. |
 | **Code Reaction** | Deterministic JavaScript that runs when a Data Webhook receives data. |
 | **LLM Reaction** | An AI agent that interprets Data Webhook events. |
-| **Signal Bot** | Executes signals: CEX (Binance, Bitget, Kraken, Gate.io, MEXC, Hyperliquid, Alpaca), DEX (Uniswap on Polygon / Arbitrum), Prediction (Polymarket, Outcome.xyz; beta). |
+| **Signal Bot** | Executes signals: CEX (Binance, Bitget, Kraken, Gate.io, MEXC, Hyperliquid, Aster, Lighter, Alpaca), DEX (Uniswap on Polygon / Arbitrum), Prediction (Polymarket, Outcome.xyz, Kalshi; beta). |
 
 A strategy only trades if **send signal** is enabled, it points to a Bot
 Webhook, that webhook and an attached Signal Bot are ACTIVE, and the bot's
@@ -90,7 +90,7 @@ symbol matches the signal symbol. The full execution checklist is in
 | Webhooks, the signal payload, callbacks, sending signals | `sigrex-webhooks` |
 | Exchange API keys and CEX bots | `sigrex-cex-bots` |
 | Uniswap DEX bots, GasTank, contracts | `sigrex-dex-bots` |
-| Polymarket / Outcome.xyz prediction bots | `sigrex-prediction-bots` |
+| Polymarket / Outcome.xyz / Kalshi prediction bots | `sigrex-prediction-bots` |
 | Code Strategies and Code Reactions (JavaScript) | `sigrex-code-strategies` |
 | LLM providers, LLM Sessions, prompts, AI tools | `sigrex-llm-trading` |
 | Data Webhook pipelines with Reactions | `sigrex-reactions` |

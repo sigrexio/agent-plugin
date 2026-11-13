@@ -3,7 +3,7 @@ name: sigrex-strategy-flows
 description: Step-by-step playbooks for building complete, working Sigrex trading flows end to end - TradingView/script alerts to CEX bots, Code Strategy to bot, LLM Session to bot, Data Webhook with Code or LLM Reactions, DEX (Uniswap) and prediction bots, fan-out to many bots/accounts, copy-trading, execution callbacks, and supervisor setups. Each flow gives the dependency order, exact API bodies, wiring checks, the test ladder, go-live order, kill switch, and how to verify execution. Use whenever a user wants a Sigrex strategy or signal flow actually set up and executing, or a broken flow fixed.
 metadata:
   author: sigrex
-  version: "2.0"
+  version: "2.1"
 ---
 
 # Sigrex Strategy Flows
@@ -223,8 +223,8 @@ Details: `sigrex-dex-bots`.
 
 ## Flow 7: Prediction Markets
 
-Prediction bots (Polymarket, Outcome.xyz) are driven only through their Bot
-Webhook:
+Prediction bots (Polymarket, Outcome.xyz, Kalshi) are driven only through
+their Bot Webhook:
 
 - **Direct:** source posts
   `{"key":"...","slug":"<market-slug>","outcome":"Yes","side":"BUY","size":5}`
@@ -235,6 +235,11 @@ Webhook:
   bots.
 - No `TEST` flag exists: check the payload against the prediction rules (`sigrex-prediction-bots`),
   preflight the market, then trade the minimum size with approval.
+- The `slug` is the bot's market: Polymarket market slug, Kalshi market
+  ticker, Outcome.xyz event id or (events with several markets) market id.
+- A `SELL` closes the whole position (or `size` shares when the size comes
+  from the signal); unsold shares produce a warning notification and the bot
+  keeps running.
 
 Details: `sigrex-prediction-bots`.
 
